@@ -1,6 +1,6 @@
 .PHONY: build
 
-AWS_ROLE ?= arn:aws:iam::543279062384:role/admin
+AWS_ROLE ?= arn:aws:iam::250658028269:role/test_admin
 
 build:
 	$(if $(and $(AWS_PROFILE),$(AWS_ROLE)),$(call assume_role,$(AWS_ROLE)),)
