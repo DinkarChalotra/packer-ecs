@@ -14,5 +14,5 @@ EOF
 
 sudo ln -sf /usr/share/zoneinfo/$timezone /etc/localtime
 
-# Enable NTP
-#sudo chkconfig ntpd on
+# Enable NTP\chrony
+sudo chkconfig chronyd on

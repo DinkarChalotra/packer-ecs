@@ -25,6 +25,8 @@ then
     /etc/sysconfig/docker
 fi
 
+sudo ip link del docker0 || true
+
 # Write AWS Logs region
 sudo tee /etc/awslogs/awscli.conf << EOF > /dev/null
 [plugins]
@@ -71,10 +73,18 @@ time_zone = UTC
 EOF
 
 # Start services
-sudo service awslogs start
+# sudo service awslogs start
+sudo systemctl enable awslogsd
+systemctl is-enabled awslogsd
+
 sudo chkconfig docker on
 sudo service docker start
+systemctl is-active docker
+
 sudo start ecs
+systemctl is-active ecs
+
+# sudo chkconfig awslogs on
 
 # Exit gracefully if ECS_CLUSTER is not defined
 if [[ -z ${ECS_CLUSTER} ]]
